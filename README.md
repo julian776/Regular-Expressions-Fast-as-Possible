@@ -108,6 +108,44 @@ const regex = /a?b/ //Will match b, ab
 const regex = /a*?b/ //Will match b, ab
 ```
 
-### ^
+### Caret ^
 
-This modifier has two roles, look for some character at start of string or tells that not match.  
+This modifier has two roles, look for some character at start of string or tells that not match some character. 
+
+The ^ is different, it works on the next character.
+
+```Javascript
+const regex = /^ab/ //Will match ab
+const regex = /[^ab]/ //Will match any character except a or b
+const regex = /^[abrt]/ //Will match a, b, r, or t in the start of the string
+```
+
+We introduce a different way to use \[\], just wait a second.
+
+### How to create complex patterns?
+
+Most of the time we are going to mix modifiers, ranges and more in the same pattern.
+
+In the order your pattern is written is the same order a string need to be to match that pattern.
+
+Look an example: To validate a number at the start of the string, next a letter in lower case and at the end "#"
+
+The pattern will be: **/\[0-9\]\[a-z]#/**
+
+Let look each part of the pattern. First we have a range \[0-9\]. In the middle we have another range \[a-z\]. At the end we have # 
+
+That's all, you need to config your pattern in the way you like to validate your string (I will give you more examples at the end)
+
+### What means expressions like ^\[abety\]
+
+Well this kind of expressions means: The ^ will affect all between \[\]
+
+**Note: Look that is each character inside but not all of them, if you like to match exactly those character at the beginning of a string
+you can create a pattern like /abety\[0-9]/
+**
+
+```Javascript
+const regex = /^\[abety]/ //Will match a, b, e, t, y or more complex strings like ahty, bertre
+const regex = /[0-9]+/ //Will match any digit one or more times
+const regex = /[^a-zA-Z]/ //Will match any character except letters 
+```
