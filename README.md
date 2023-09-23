@@ -22,6 +22,7 @@ Regular expressions are powerful and essential tools for programmers. In this gu
   - [Caret `^`](#caret-)
 - [Creating Complex Patterns](#creating-complex-patterns)
   - [Understanding Expressions like `^[abety]`](#understanding-expressions-like-abety)
+- [Performance](#performance)
   
 # Basics of Regular Expressions
 
@@ -57,14 +58,22 @@ const resultRegex1 = regex1.test("9") // true
 const resultRegex2 = regex2.test("9") // false => The number 9 is not in range
 ```
 You can specify a range of letters
+
 **Note: Keep in mind that regex patterns are case-sensitive:**
 
 ```Javascript
 const regex1 = /[a-z]/ //Match any letter in lowercase
-const regex = /[A-Z]/ //Match any letter in uppercase
+const regex2 = /[A-Z]/ //Match any letter in uppercase
 
 const resultRegex1 = regex1.test("W") // false => The letter is upper case and the regex1 checks all letters lower case
 const resultRegex2 = regex2.test("E") // true
+```
+
+To make our regex **case-insensitive**, we can add the letter 'i' at the end.
+```Javascript
+const regex = /[a-z]/i //Match any letter case-insensitive
+
+const resultRegex = regex.test("W") // true
 ```
 
 # Modifiers
@@ -146,3 +155,21 @@ const regex1 = /^[abety]/; // Matches a, b, e, t, y, or more complex strings
 const regex2 = /[0-9]+/; // Matches any digit one or more times
 const regex3 = /[^a-zA-Z]/; // Matches any character except letters
 ```
+
+# Performance
+
+It is always preferred to make your regex fail quickly to save computation time and enhance program efficiency.
+
+This concept can save you a significant amount of time when querying databases. For instance, if you're searching for a phone number and you only have the initial digits, you can:
+
+```JS
+const regex = /17895/ // Matches 17895 in any part of fthe string
+```
+
+In the regex above, you have a query that searches the database but checks for a match anywhere in the strings. Later, you can refine your query to make the regex search only for the specific substring it contains at the beginning.
+
+```JS
+const regex = /^17895/ // Matches 17895 at the beginning of the string
+```
+
+Please note that the regex will fail immediately if the first characters do not match, eliminating the need to evaluate the entire string for a match.
