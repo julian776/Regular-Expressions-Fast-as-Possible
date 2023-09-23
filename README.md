@@ -39,7 +39,7 @@ const regex = new RegExp("regex-pattern-here"); // The pattern is provided as a 
 
 The most basic pattern is an exact match:
 
-```Javascript
+```javascript
 const regex = /jhon/
 const strToCheck = "jhon"
 
@@ -50,7 +50,7 @@ console.log(regex.test(strToCheck)) //Prints true
 
 You can create a range in your pattern using [start-end]:
 
-```Javascript
+```javascript
 const regex1 = /[0-9]/ //Match numbers from 0 to 9
 const regex2 = /[2-5]/ //Match numbers from 2 to 5
 
@@ -61,7 +61,7 @@ You can specify a range of letters
 
 **Note: Keep in mind that regex patterns are case-sensitive:**
 
-```Javascript
+```javascript
 const regex1 = /[a-z]/ //Match any letter in lowercase
 const regex2 = /[A-Z]/ //Match any letter in uppercase
 
@@ -70,7 +70,7 @@ const resultRegex2 = regex2.test("E") // true
 ```
 
 To make our regex **case-insensitive**, we can add the letter 'i' at the end.
-```Javascript
+```javascript
 const regex = /[a-z]/i //Match any letter case-insensitive
 
 const resultRegex = regex.test("W") // true
@@ -84,7 +84,7 @@ Modifiers add specificity to regex patterns. Let's explore what each modifier me
 
 The asterisk indicates that the preceding character can appear 0 or more times:
 
-```Javascript
+```javascript
 const regex = /a*b/
 
 const regexResult = regex.test("aaaaab") // true => The pattern matches b, ab, aab, aaab, ....aaaaaaaaaaaaaaaaaaab
@@ -94,7 +94,7 @@ const regexResult = regex.test("aaaaab") // true => The pattern matches b, ab, a
 
 The plus sign indicates that the preceding character must appear 1 or more times:
 
-```Javascript
+```javascript
 const regex = /a*b/
 
 const regexResult = regex.test("aaaaaaaaaaab") // true => The pattern matches ab, aab, aab, aaaab ... aaaaaaaaaaaaaaaaaaaaab
@@ -105,7 +105,7 @@ Keep in mind that some strings like "aabbb" will be false because the b is expli
 
 Curly braces specify a range of times a character can appear in a string:
 
-```Javascript
+```javascript
 const regex1 = /a{0,2}b/; // Matches b, ab, aab
 const regex2 = /a{1,}b/; // Matches ab, aab, aaab, ...
 const regex3 = /a{2}b/; // Matches aab only
@@ -115,7 +115,7 @@ const regex3 = /a{2}b/; // Matches aab only
 
 The dot is a wildcard that matches any character:
 
-```Javascript
+```javascript
 const regex = /ab./; // Matches ab*, ab!, abr, ab4, ...
 ```
 
@@ -123,7 +123,7 @@ const regex = /ab./; // Matches ab*, ab!, abr, ab4, ...
 
 The question mark indicates that the preceding character can appear 0 or 1 time:
 
-```Javascript
+```javascript
 const regex1 = /a?b/; // Matches b, ab
 const regex2 = /a*?b/; // Matches b, ab
 ```
@@ -132,7 +132,7 @@ const regex2 = /a*?b/; // Matches b, ab
 
 The caret has two roles: it can match a character at the start of a string or negate a character:
 
-```Javascript
+```javascript
 const regex1 = /^ab/; // Matches ab at the start of the string
 const regex2 = /[^ab]/; // Matches any character except a or b
 const regex3 = /^[abrt]/; // Matches a, b, r, or t at the start of the string
@@ -150,7 +150,7 @@ Remember that you can configure your pattern to suit your specific string valida
 
 Expressions like this mean that the caret ^ affects all characters within the brackets []. If you want to match those characters exactly at the beginning of a string, you can create a pattern like /abety[0-9]/.
 
-```Javascript
+```javascript
 const regex1 = /^[abety]/; // Matches a, b, e, t, y, or more complex strings
 const regex2 = /[0-9]+/; // Matches any digit one or more times
 const regex3 = /[^a-zA-Z]/; // Matches any character except letters
@@ -162,13 +162,13 @@ It is always preferred to make your regex fail quickly to save computation time 
 
 This concept can save you a significant amount of time when querying databases. For instance, if you're searching for a phone number and you only have the initial digits, you can:
 
-```JS
+```javascript
 const regex = /17895/ // Matches 17895 in any part of fthe string
 ```
 
 In the regex above, you have a query that searches the database but checks for a match anywhere in the strings. Later, you can refine your query to make the regex search only for the specific substring it contains at the beginning.
 
-```JS
+```javascript
 const regex = /^17895/ // Matches 17895 at the beginning of the string
 ```
 
