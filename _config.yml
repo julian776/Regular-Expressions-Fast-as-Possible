@@ -27,7 +27,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   with them, address performance issues and how to
   avoid them, and finally, best practices for writing
   your regular expressions.
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "Regular-Expressions-Fast-as-Possible" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  julian776
 
