@@ -2,17 +2,22 @@
 
 Regular expressions are powerful and essential tools for programmers. In this guide, you'll find the basics of how to work with them, address performance issues and how to avoid them, and finally, best practices for writing your regular expressions.
 
-**Note**: While the code examples are in JavaScript, the patterns and how they work are similar in most programming languages. Feel free to try them in your preferred language!
+**Note:** While the code examples are in JavaScript, the patterns and how they work are similar in most programming languages. Feel free to try them in your preferred language!
+
+**See deployed page:** https://julian776.github.io/Regular-Expressions-Fast-as-Possible
+
+# Table of Contents
 
 - [Regular Expressions: Fast as Possible](#regular-expressions-fast-as-possible)
+- [Table of Contents](#table-of-contents)
 - [Basics of Regular Expressions](#basics-of-regular-expressions)
 - [Creating Patterns](#creating-patterns)
   - [Character Ranges](#character-ranges)
 - [Modifiers](#modifiers)
-  - [Asterisk \*](#asterisk-)
-  - [Plus +](#plus-)
-  - [Curly Braces {}](#curly-braces-)
-  - [Dot .](#dot-)
+  - [Asterisk `*`](#asterisk-)
+  - [Plus `+`](#plus-)
+  - [Curly Braces `{}`](#curly-braces-)
+  - [Dot `.`](#dot-)
   - [Question Mark `?`](#question-mark-)
   - [Caret `^`](#caret-)
 - [Creating Complex Patterns](#creating-complex-patterns)
@@ -66,7 +71,7 @@ const resultRegex2 = regex2.test("E") // true
 
 Modifiers add specificity to regex patterns. Let's explore what each modifier means.
 
-## Asterisk *
+## Asterisk `*`
 
 The asterisk indicates that the preceding character can appear 0 or more times:
 
@@ -76,7 +81,7 @@ const regex = /a*b/
 const regexResult = regex.test("aaaaab") // true => The pattern matches b, ab, aab, aaab, ....aaaaaaaaaaaaaaaaaaab
 ```
 
-## Plus +
+## Plus `+`
 
 The plus sign indicates that the preceding character must appear 1 or more times:
 
@@ -87,7 +92,7 @@ const regexResult = regex.test("aaaaaaaaaaab") // true => The pattern matches ab
 ```
 Keep in mind that some strings like "aabbb" will be false because the b is explicitly required only once.
 
-## Curly Braces {}
+## Curly Braces `{}`
 
 Curly braces specify a range of times a character can appear in a string:
 
@@ -97,7 +102,7 @@ const regex2 = /a{1,}b/; // Matches ab, aab, aaab, ...
 const regex3 = /a{2}b/; // Matches aab only
 ```
 
-## Dot .
+## Dot `.`
 
 The dot is a wildcard that matches any character:
 
