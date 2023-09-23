@@ -1,37 +1,48 @@
-# Regexs Fast as possible
+# Regular Expressions: Fast as Possible
 
-Regexs are powerfull and one important tool as a programmer.
-Here you will find basics of how to work with them, some performance problems and how to avoid them and finally good practices writing your regexs.
+Regular expressions are powerful and essential tools for programmers. In this guide, you'll find the basics of how to work with them, address performance issues and how to avoid them, and finally, best practices for writing your regular expressions.
 
-### Code examples will be in JavaScript but regexs patterns and how they work is the same in most languages
-### Try in your preferred language!
+**Note**: While the code examples are in JavaScript, the patterns and how they work are similar in most programming languages. Feel free to try them in your preferred language!
 
-# Basic of regexs
+- [Regular Expressions: Fast as Possible](#regular-expressions-fast-as-possible)
+- [Basics of Regular Expressions](#basics-of-regular-expressions)
+- [Creating Patterns](#creating-patterns)
+  - [Character Ranges](#character-ranges)
+- [Modifiers](#modifiers)
+  - [Asterisk \*](#asterisk-)
+  - [Plus +](#plus-)
+  - [Curly Braces {}](#curly-braces-)
+  - [Dot .](#dot-)
+  - [Question Mark `?`](#question-mark-)
+  - [Caret `^`](#caret-)
+- [Creating Complex Patterns](#creating-complex-patterns)
+  - [Understanding Expressions like `^[abety]`](#understanding-expressions-like-abety)
+  
+# Basics of Regular Expressions
 
-Regex basically match patterns. We have to tell the pattern and the regex will compare the pattern with some string we want.
-If the pattern corresponds regex returns true if not returns false. (Regex can do more than return true or false but first the basics)
+Regular expressions (regex) are used to match patterns in strings. You provide a pattern, and the regex compares it to the string you want to check. If the pattern matches, the regex returns true; otherwise, it returns false. Let's start with the fundamentals.
 
-In JS we have two ways to write a regex
+In JavaScript, there are two ways to create a regex:
 
-```Javascript
-const regex = /regex-pattern-here/ //With this syntax you not use string
-const regex = new RegExp("regex-pattern-here") //The pattern is given as a string
+```javascript
+const regex = /regex-pattern-here/; // Using this syntax, you don't need quotes.
+const regex = new RegExp("regex-pattern-here"); // The pattern is provided as a string.
 ```
 
-## We have the syntaxs but how we create a pattern?
+# Creating Patterns
 
-### The most basic pattern we can create is an exact match
+The most basic pattern is an exact match:
 
 ```Javascript
-const regex = /tatiana/
-const strToCheck = "tatiana"
+const regex = /jhon/
+const strToCheck = "jhon"
 
 console.log(regex.test(strToCheck)) //Prints true
 ```
 
-### Range
+## Character Ranges
 
-We create a range in our pattern with **\[start-finall\]**
+You can create a range in your pattern using [start-end]:
 
 ```Javascript
 const regex1 = /[0-9]/ //Match numbers from 0 to 9
@@ -41,7 +52,7 @@ const resultRegex1 = regex1.test("9") // true
 const resultRegex2 = regex2.test("9") // false => The number 9 is not in range
 ```
 You can specify a range of letters
-**Note: Regexs pattern are sensitive to upper case and lower case letters. Take in mind**
+**Note: Keep in mind that regex patterns are case-sensitive:**
 
 ```Javascript
 const regex1 = /[a-z]/ //Match any letter in lowercase
@@ -51,101 +62,82 @@ const resultRegex1 = regex1.test("W") // false => The letter is upper case and t
 const resultRegex2 = regex2.test("E") // true
 ```
 
-## Modifiers
+# Modifiers
 
-The modifiers allowed us to add specificity to our patterns. Lets look what each of them means in our patterns
+Modifiers add specificity to regex patterns. Let's explore what each modifier means.
 
-### Asterisk *
+## Asterisk *
 
-The asterik tell that the preceding character can be 0 or more times.
+The asterisk indicates that the preceding character can appear 0 or more times:
 
 ```Javascript
 const regex = /a*b/
 
-const regexResult = regex.test("aaaaab") // true => The pattern matches b, ab, aab, aaab, .... aaaaaaaaaaaaaaaaaaab
+const regexResult = regex.test("aaaaab") // true => The pattern matches b, ab, aab, aaab, ....aaaaaaaaaaaaaaaaaaab
 ```
 
-### Sum symbol +
+## Plus +
 
-The  + tells that the preceding character can be 1 or more times
+The plus sign indicates that the preceding character must appear 1 or more times:
 
 ```Javascript
 const regex = /a*b/
 
 const regexResult = regex.test("aaaaaaaaaaab") // true => The pattern matches ab, aab, aab, aaaab ... aaaaaaaaaaaaaaaaaaaaab
 ```
-You need to take in mind that some string like "aabbb" will be false because the b is explicitly one time and has no modifiers.
+Keep in mind that some strings like "aabbb" will be false because the b is explicitly required only once.
 
-Another expression like "aaaa" will fail again because the pattern needs a b explictly.
+## Curly Braces {}
 
-### The {}
-
-The {} tells to the pattern a range of times a character can exist in a strign.
+Curly braces specify a range of times a character can appear in a string:
 
 ```Javascript
-const regex = /a{0, 2}b/ // Will match b, ab, aab
-const regex = /a{,2}b/ //Will match b, ab, aab
-const regex = /a{1,}b/ //Will match ab, aab, aaab, aaaaaaaab .... aaaaaaaaaaaaaaaaaaaaab ...
-const regex = /a{2}b/ //Will match aab only
+const regex1 = /a{0,2}b/; // Matches b, ab, aab
+const regex2 = /a{1,}b/; // Matches ab, aab, aaab, ...
+const regex3 = /a{2}b/; // Matches aab only
 ```
 
-### The point .
+## Dot .
 
-This modifier is like a wildcard, where the point is can be any symbol.
+The dot is a wildcard that matches any character:
 
 ```Javascript
-const regex = /ab./ // Will match ab*, ab!, abr, ab4 ... and so on
+const regex = /ab./; // Matches ab*, ab!, abr, ab4, ...
 ```
 
-### Question mark ?
+## Question Mark `?`
 
-The preceding character can be 0 or 1 time.
-
-If you use the ? after any other modifier will make it non-greedy and matching only 0 or 1 times
+The question mark indicates that the preceding character can appear 0 or 1 time:
 
 ```Javascript
-const regex = /a?b/ //Will match b, ab
-const regex = /a*?b/ //Will match b, ab
+const regex1 = /a?b/; // Matches b, ab
+const regex2 = /a*?b/; // Matches b, ab
 ```
 
-### Caret ^
+## Caret `^`
 
-This modifier has two roles, look for some character at start of string or tells that not match some character. 
-
-The ^ is different, it works on the next character.
+The caret has two roles: it can match a character at the start of a string or negate a character:
 
 ```Javascript
-const regex = /^ab/ //Will match ab
-const regex = /[^ab]/ //Will match any character except a or b
-const regex = /^[abrt]/ //Will match a, b, r, or t in the start of the string
+const regex1 = /^ab/; // Matches ab at the start of the string
+const regex2 = /[^ab]/; // Matches any character except a or b
+const regex3 = /^[abrt]/; // Matches a, b, r, or t at the start of the string
 ```
 
 We introduce a different way to use \[\], just wait a second.
 
-### How to create complex patterns?
+# Creating Complex Patterns
 
-Most of the time we are going to mix modifiers, ranges and more in the same pattern.
+To create complex patterns, you can mix modifiers, ranges, and more in the same pattern. The order in which your pattern is written is the order in which the string must match it. For example, to validate a number at the start of a string, followed by a lowercase letter, and ending with "#," the pattern would be /[0-9][a-z]#/.
 
-In the order your pattern is written is the same order a string need to be to match that pattern.
+Remember that you can configure your pattern to suit your specific string validation needs.
 
-Look an example: To validate a number at the start of the string, next a letter in lower case and at the end "#"
+## Understanding Expressions like `^[abety]`
 
-The pattern will be: **/\[0-9\]\[a-z]#/**
-
-Let look each part of the pattern. First we have a range \[0-9\]. In the middle we have another range \[a-z\]. At the end we have # 
-
-That's all, you need to config your pattern in the way you like to validate your string (I will give you more examples at the end)
-
-### What means expressions like ^\[abety\]
-
-Well this kind of expressions means: The ^ will affect all between \[\]
-
-**Note: Look that is each character inside but not all of them, if you like to match exactly those character at the beginning of a string
-you can create a pattern like /abety\[0-9]/
-**
+Expressions like this mean that the caret ^ affects all characters within the brackets []. If you want to match those characters exactly at the beginning of a string, you can create a pattern like /abety[0-9]/.
 
 ```Javascript
-const regex = /^\[abety]/ //Will match a, b, e, t, y or more complex strings like ahty, bertre
-const regex = /[0-9]+/ //Will match any digit one or more times
-const regex = /[^a-zA-Z]/ //Will match any character except letters 
+const regex1 = /^[abety]/; // Matches a, b, e, t, y, or more complex strings
+const regex2 = /[0-9]+/; // Matches any digit one or more times
+const regex3 = /[^a-zA-Z]/; // Matches any character except letters
 ```
