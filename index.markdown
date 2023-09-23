@@ -5,8 +5,6 @@
 layout: home
 ---
 
-# Regular Expressions: Fast as Possible
-
 Regular expressions are powerful and essential tools for programmers. In this guide, you'll find the basics of how to work with them, address performance issues and how to avoid them, and finally, best practices for writing your regular expressions.
 
 **Note:** While the code examples are in JavaScript, the patterns and how they work are similar in most programming languages. Feel free to try them in your preferred language!
@@ -15,7 +13,6 @@ Regular expressions are powerful and essential tools for programmers. In this gu
 
 # Table of Contents
 
-- [Regular Expressions: Fast as Possible](#regular-expressions-fast-as-possible)
 - [Table of Contents](#table-of-contents)
 - [Basics of Regular Expressions](#basics-of-regular-expressions)
 - [Creating Patterns](#creating-patterns)
